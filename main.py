@@ -1,6 +1,6 @@
 import argparse
-from importlib.metadata import files
 import sys
+from helper.binaries import Packages
 from helper.files import BackupFile
 from helper.persistent import Store
 from textwrap import dedent
@@ -34,6 +34,10 @@ def parser():
         action="store_true",
     )
     parser.add_argument(
+        "--fetch", help="Obtiene la lista de paquetes disponibles", action="store_true"
+    )
+    parser.add_argument("--install", type=str, help="Instala un paquete específico")
+    parser.add_argument(
         "--logs", help="Muestra el historial de commits", action="store_true"
     )
     parser.add_argument(
@@ -65,6 +69,7 @@ def main():
 
     store = Store()
     backup = BackupFile()
+    package = Packages()
 
     backup.setCredentials(
         host="localhost",
@@ -76,6 +81,14 @@ def main():
 
     if args.version:
         print("Version 1.0.0")
+
+    if args.fetch:
+        packages = package.fetch("postgres")
+        for pkg in packages:
+            print(f"- {pkg['name']} \033[33m[{pkg['title']}]\033[0m")
+
+    if args.install:
+        package.install(args.install)
 
     if args.checkout:
         print(f"Checkout al commit \033[33m'{args.checkout}'\033[0m")

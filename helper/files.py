@@ -2,6 +2,10 @@ import subprocess
 import os
 from pathlib import Path
 from datetime import datetime
+import sys
+import zipfile
+
+import requests
 
 
 class BackupFile:
@@ -32,7 +36,7 @@ class BackupFile:
     def execute(self, pathFile):
         self.dropAll()
         binary_path = self.__binary_path("pg_restore")
-        
+
         if not os.path.exists(binary_path):
             print(f"\033[31mpg_restore no encontrado en {binary_path}\033[0m")
             exit(1)
@@ -88,7 +92,7 @@ class BackupFile:
         user="postgres",
         dbname="postgres",
     ):
-        
+
         binary_path = self.__binary_path("pg_dump")
 
         if not os.path.exists(binary_path):
@@ -129,3 +133,43 @@ class BackupFile:
             exit(1)
 
         return str(output_path)
+
+
+class DownloadFile:
+    def __init__(self):
+        self.base_dir = Path(__file__).resolve().parent.parent
+
+    def downloadZip(self, url, output_path):
+        try:
+            response = requests.get(url, stream=True)
+            response.raise_for_status()
+            total = int(response.headers.get("content-length", 0))
+            downloaded = 0
+            with open(output_path, "wb") as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+                    downloaded += len(chunk)
+
+                    percent = downloaded * 100 / total if total > 0 else 0
+                    sys.stdout.write(
+                        f"\rDescargando... \033[32m{percent:.2f}%\033[0m  ({downloaded}/{total} bytes)"
+                    )
+                    sys.stdout.flush()
+
+        except requests.RequestException as e:
+            print(f"\033[31mError al descargar el archivo: {e}\033[0m")
+            exit(1)
+
+    def extractZip(self, zip_path, extract_to):
+        try:
+            with zipfile.ZipFile(zip_path, "r") as zip_ref:
+                zip_ref.extractall(extract_to)
+        except zipfile.BadZipFile as e:
+            print(f"\033[31mError al extraer el archivo ZIP: {e}\033[0m")
+            exit(1)
+
+    def downloadAndExtract(self, url, extract_to):
+        zip_path = self.base_dir / "binaries" / "temp.zip"
+        self.downloadZip(url, zip_path)
+        self.extractZip(zip_path, extract_to)
+        os.remove(zip_path)
