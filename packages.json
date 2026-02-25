@@ -1,0 +1,46 @@
+{
+    "postgres": [
+        {
+            "name": "Windows x86-64",
+            "platform": "windows",
+            "version": "17.8",
+            "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1260006"
+        },
+        {
+            "name": "Windows x86-64",
+            "platform": "windows",
+            "version": "16.12",
+            "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1260005"
+        },
+        {
+            "name": "Windows x86-64",
+            "platform": "windows",
+            "version": "15.6",
+            "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1260002"
+        },
+        {
+            "name": "Windows x86-64",
+            "platform": "windows",
+            "version": "14.21",
+            "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1259997"
+        },
+        {
+            "name": "Windows x86-64",
+            "platform": "windows",
+            "version": "13.23",
+            "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1259854"
+        },
+        {
+            "name": "Windows x86-64",
+            "platform": "windows",
+            "version": "11.21",
+            "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1258670"
+        },
+        {
+            "name": "Windows x86-64",
+            "platform": "windows",
+            "version": "10.23",
+            "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1258258"
+        }
+    ]
+}
