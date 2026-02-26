@@ -57,6 +57,58 @@ snapdb [OPTIONS] COMMAND [ARGS]...
 - `add` — Agrega un archivo de respaldo al staging.
 - `commit` — Crea un nuevo commit con los archivos en staging.
 
+## Getting Started
+
+Ejemplo de flujo completo desde cero.
+
+### 1. Inicializar el proyecto
+
+```bash
+snapdb init test-Project
+```
+
+### 2. Crear una conexión a la base de datos
+
+```bash
+snapdb create-connection my-fir -H localhost -P 5432 -U postgres -d postgres -p postgres
+```
+
+### 3. Instalar el driver de PostgreSQL
+
+```bash
+snapdb install @windows/postgres-17.8
+```
+
+### 4. Establecer el driver por defecto
+
+```bash
+snapdb use @windows/postgres-17.8
+```
+
+### 5. Agregar un backup al staging
+
+```bash
+snapdb add hola
+```
+
+### 6. Crear un commit
+
+```bash
+snapdb commit "hola"
+```
+
+### 7. Ver el historial de commits
+
+```bash
+snapdb logs
+```
+
+### 8. Restaurar a un commit específico
+
+```bash
+snapdb checkout <hash>
+```
+
 ## Screenshot
 
 ![alt text](image.png)
