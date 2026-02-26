@@ -11,7 +11,7 @@ from helper.persistent import Store
 class BackupFile:
     def __init__(
         self,
-        path="./backups",
+        path="./.snapdb/backups",
         driver="postgres",
     ):
         self.path = path
@@ -22,10 +22,16 @@ class BackupFile:
         self.store = Store()
 
     def __binary_path(self, command):
-
+        extension = ".exe" if self.platform == "nt" else ""
         package = self.store.getActivePackage()
+
         binary_path = (
-            self.base_dir / "binaries" / package / "pgsql" / "bin" / f"{command}.exe"
+            self.base_dir
+            / "binaries"
+            / package
+            / "pgsql"
+            / "bin"
+            / f"{command}{extension}"
         )
         return binary_path.resolve()
 
@@ -92,19 +98,21 @@ class BackupFile:
     def backup(
         self,
         name="backup",
-        user="postgres",
-        dbname="postgres",
+        
     ):
-
+        config = self.store.getConfigActive()
         binary_path = self.__binary_path("pg_dump")
 
         if not os.path.exists(binary_path):
             print(f"\033[31mpg_dump no encontrado en {binary_path}\033[0m")
             exit(1)
 
+        base_path =  Path(config["path"]) / self.path
+
+        if(not base_path.exists()): base_path.mkdir(parents=True, exist_ok=True)
+        
         output_path = (
-            self.base_dir
-            / self.path
+            base_path
             / f"{name}_{datetime.now().strftime('%Y%m%d%H%M%S')}.dump"
         )
 
@@ -116,9 +124,9 @@ class BackupFile:
                 "-p",
                 str(self.port),
                 "-U",
-                user,
+                self.user,
                 "-d",
-                dbname,
+                self.database,
                 "--no-owner",
                 "--no-privileges",
                 "--format=custom",
@@ -165,8 +173,16 @@ class DownloadFile:
 
     def extractZip(self, zip_path, extract_to):
         try:
+            sys.stdout.write(f"\n\033[33mExtrayendo...\033[0m")
             with zipfile.ZipFile(zip_path, "r") as zip_ref:
-                zip_ref.extractall(extract_to)
+                total_files = len(zip_ref.infolist())
+                for i, member in enumerate(zip_ref.infolist(), start=1):
+                    zip_ref.extract(member, extract_to)
+                    sys.stdout.write(
+                        f"\033[33m\rExtrayendo.... ({i}/{total_files})\033[0m"
+                    )
+                    sys.stdout.flush()
+
         except zipfile.BadZipFile as e:
             print(f"\033[31mError al extraer el archivo ZIP: {e}\033[0m")
             exit(1)

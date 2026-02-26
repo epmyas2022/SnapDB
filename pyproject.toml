@@ -1,0 +1,7 @@
+[project]
+name = "snapdb"
+version = "1.0.0"
+dependencies = ["typer", "requests"]
+
+[project.scripts]
+snapdb = "main:app"

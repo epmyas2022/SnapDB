@@ -8,3 +8,8 @@ __pycache__/*
 *.sqlite3
 *.log
 *.zip
+.snapdb/*
+
+/src/binaries/*
+!/src/binaries/.gitkeep
+snapdb.egg-info

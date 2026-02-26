@@ -3,6 +3,7 @@ from helper.files import BackupFile
 from helper.persistent import Store
 from textwrap import dedent
 import typer
+from pathlib import Path
 
 
 def banner():
@@ -29,13 +30,7 @@ backup = BackupFile()
 package = Packages()
 
 
-backup.setCredentials(
-    host="localhost",
-    port=5432,
-    user="postgres",
-    password="postgres",
-    database="postgres",
-)
+store.configActive(Path.cwd())
 
 
 @app.command()
@@ -44,10 +39,12 @@ def use(package: str):
     store.updatePackage(package_name, True)
     typer.echo(f"Paquete '\033[32m{package_name}\033[0m' activado.")
 
+
 @app.command()
 def version():
     """Muestra la versión actual."""
     typer.echo("Version 1.0.0")
+
 
 @app.command()
 def fetch():
@@ -55,6 +52,7 @@ def fetch():
     packages = package.fetch("postgres")
     for pkg in packages:
         typer.echo(f"- {pkg['name']} \033[33m[{pkg['title']}]\033[0m")
+
 
 @app.command()
 def list():
@@ -65,10 +63,12 @@ def list():
             f"- {pkg['name']} \033[32m{'(activo)' if pkg['active'] else ''}\033[0m"
         )
 
+
 @app.command()
-def install(package: str):
+def install(package_name: str):
     """Instala un paquete específico."""
-    package.install(package)
+    package.install(package_name)
+
 
 @app.command()
 def checkout(commit: str):
@@ -78,6 +78,7 @@ def checkout(commit: str):
     commit_data = store.getCommit(commit)
 
     backup.execute(commit_data["file_name"])
+
 
 @app.command()
 def status():
@@ -104,9 +105,46 @@ def logs():
 
 
 @app.command()
-def init(repo_name: str):
+def init(name: str):
     """Inicializa un nuevo repositorio de control de versiones."""
-    typer.echo("Repositorio de control de versiones inicializado.")
+    store.createConfig(name)
+    typer.echo(f"Configuración '{name}' creada y activada.")
+
+
+@app.command()
+def connections():
+    """Muestra las conexiones disponibles."""
+    connections = store.getConnections()
+    for conn in connections:
+        typer.echo(f"- {conn[0]} \033[32m{'(activo)' if conn[1] else ''}\033[0m")
+
+
+@app.command()
+def connect(name: str):
+    """Activa una conexión específica."""
+    store.updateConnection(name, True)
+    typer.echo(f"Conexión '\033[32m{name}\033[0m' activada.")
+
+
+@app.command("create-connection")
+def create_connection(
+    name: str,
+    host: str = typer.Option(..., "--host", "-H", help="Host de la base de datos"),
+    port: int = typer.Option(..., "--port", "-P", help="Puerto de la base de datos"),
+    user: str = typer.Option(..., "--user", "-U", help="Usuario de la base de datos"),
+    password: str | None = typer.Option(
+        None,
+        "--password",
+        "-p",
+        help="Contraseña de la base de datos",
+    ),
+    database: str = typer.Option(
+        ..., "--database", "-d", help="Nombre de la base de datos"
+    ),
+):
+    """Crea una nueva conexión."""
+    store.createConnection(host, port, user, password, database, name)
+    typer.echo(f"Conexión '\033[32m{name}\033[0m' creada.")
 
 
 @app.command()
@@ -129,8 +167,23 @@ def commit(message: str):
 
 
 @app.callback()
-def main():
+def main(ctx: typer.Context):
     banner()
+    isInit = ctx.invoked_subcommand == "init"
+    isCreateConnection = ctx.invoked_subcommand == "create-connection"
+
+    if isInit or isCreateConnection:
+        return
+
+    connect = store.getActiveConnection()
+
+    backup.setCredentials(
+        host=connect["host"],
+        port=connect["port"],
+        user=connect["user"],
+        password=connect["password"],
+        database=connect["database"],
+    )
 
 
 if __name__ == "__main__":

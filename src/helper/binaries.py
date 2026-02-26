@@ -26,9 +26,9 @@ class Packages:
         driver = match.group("driver")
         data = self.fetch(driver)
 
-        find = list(filter(lambda x: x["name"] == package, data))[0]
+        find = list(filter(lambda x: x["name"] == package, data))
 
-        if find is None:
+        if find is None or len(find) == 0:
             print(
                 f"\033[31mPaquete '{package}' no encontrado para el driver '{driver}'.\033[0m"
             )
@@ -36,7 +36,7 @@ class Packages:
 
         download = DownloadFile()
 
-        download.downloadAndExtract(find["url"], self.base_dir / "binaries" / package)
+        download.downloadAndExtract(find[0]["url"], self.base_dir / "binaries" / package)
 
         self.store.addPackage(package)
 
