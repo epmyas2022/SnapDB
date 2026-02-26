@@ -4,8 +4,8 @@ from pathlib import Path
 from datetime import datetime
 import sys
 import zipfile
-
 import requests
+from helper.persistent import Store
 
 
 class BackupFile:
@@ -19,10 +19,13 @@ class BackupFile:
         self.platform = os.name
         self.base_dir = Path(__file__).resolve().parent.parent
         self.env = os.environ.copy()
+        self.store = Store()
 
     def __binary_path(self, command):
+
+        package = self.store.getActivePackage()
         binary_path = (
-            self.base_dir / "binaries" / "windows" / "pgsql" / "bin" / f"{command}.exe"
+            self.base_dir / "binaries" / package / "pgsql" / "bin" / f"{command}.exe"
         )
         return binary_path.resolve()
 

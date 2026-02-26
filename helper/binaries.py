@@ -3,11 +3,13 @@ from pathlib import Path
 import requests
 
 from helper.files import DownloadFile
+from helper.persistent import Store
 
 class Packages:
     def __init__(self):
         self.repository_url = "https://raw.githubusercontent.com/epmyas2022/SnapDB/refs/heads/main/packages.json"
         self.base_dir = Path(__file__).resolve().parent.parent
+        self.store = Store()
 
 
     def install(self, package):
@@ -35,6 +37,8 @@ class Packages:
         download = DownloadFile()
 
         download.downloadAndExtract(find["url"], self.base_dir / "binaries" / package)
+
+        self.store.addPackage(package)
 
     def fetch(self, driver):
         result = requests.get(self.repository_url)
