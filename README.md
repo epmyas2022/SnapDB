@@ -28,6 +28,35 @@ Instalación en modo editable:
 pip install -e .
 ```
 
+## Uso
+
+```bash
+snapdb [OPTIONS] COMMAND [ARGS]...
+```
+
+**Opciones:**
+
+- `--install-completion` — Instala el autocompletado para el shell actual.
+- `--show-completion` — Muestra el autocompletado para el shell actual.
+- `--help` — Muestra el mensaje de ayuda y sale.
+
+**Comandos:**
+
+- `use` — Selecciona la versión de PostgreSQL a utilizar.
+- `version` — Muestra la versión actual.
+- `fetch` — Muestra la lista de paquetes disponibles.
+- `list` — Muestra la lista de paquetes instalados.
+- `install` — Instala un paquete específico.
+- `checkout` — Restaura el estado de la base de datos a un commit específico.
+- `status` — Muestra el estado actual del staging.
+- `logs` — Muestra el historial de commits.
+- `init` — Inicializa un nuevo repositorio de control de versiones.
+- `connections` — Muestra las conexiones disponibles.
+- `connect` — Activa una conexión específica.
+- `create-connection` — Crea una nueva conexión.
+- `add` — Agrega un archivo de respaldo al staging.
+- `commit` — Crea un nuevo commit con los archivos en staging.
+
 ## Screenshot
 
 ![alt text](image.png)
