@@ -35,6 +35,18 @@ Instalación en modo editable:
 pip install -e .
 ```
 
+## Instalar en Windows
+
+Ejecutar como administrador el siguiente comando en PowerShell
+
+```bash
+$u="https://github.com/epmyas2022/SnapDB/releases/download/beta/snapdb.exe";$d="C:\Tools\SnapDB";mkdir $d -Force; iwr $u -OutFile "$d\snapdb.exe"; setx PATH "$env:PATH;$d" /M
+```
+
+```bash
+snapdb --help
+```
+
 ## Uso
 
 ```bash
