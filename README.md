@@ -9,6 +9,27 @@ Proyecto de control de versiones para bases de datos PostgreSQL. Permite realiza
 > [!WARNING]
 > Actualmente solo compatible con windows.
 
+## Contenido
+
+- [Requisitos](#requisitos)
+- [Instalación](#instalación)
+- [Instalar en Windows](#instalar-en-windows)
+- [Uso](#uso)
+- [Getting Started](#getting-started)
+- [Screenshot](#screenshot)
+
+## Requisitos
+
+| Requisito | Versión mínima |
+| --------- | -------------- |
+| Python    | >= 3.8         |
+| pip       | >= 21.0        |
+
+**Dependencias de Python:**
+
+- [`typer`](https://typer.tiangolo.com/) — CLI framework
+- [`requests`](https://docs.python-requests.org/) — HTTP client
+
 ## Instalación
 
 1. Clona el repositorio:
