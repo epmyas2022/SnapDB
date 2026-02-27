@@ -1,7 +1,7 @@
 import re
 from pathlib import Path
 import requests
-import os
+import platform
 from helper.files import DownloadFile
 from helper.persistent import Store
 
@@ -45,9 +45,9 @@ class Packages:
     def fetch(self, driver):
         result = requests.get(self.repository_url)
 
-        types = {"nt": "windows", "darwin": "macos", "linux": "linux"}
+        types = {"windows": "windows", "darwin": "macos", "linux": "linux"}
 
-        filter_platform = types.get(os.name, "windows")
+        filter_platform = types.get(platform.system().lower(), "windows")
 
         if result.status_code != 200:
             print("Error al obtener la lista de paquetes.")
