@@ -2,7 +2,7 @@ import re
 from pathlib import Path
 import requests
 import platform
-from helper.files import DownloadFile
+from helper.download import DownloadFile
 from helper.persistent import Store
 import typer
 
@@ -38,10 +38,12 @@ class Packages:
         download = DownloadFile()
 
         download.downloadAndExtract(
-            find[0]["url"], self.base_dir / "binaries" / package
+            find[0]["url"],
+            self.base_dir / "binaries" / package,
+            find[0]["type"],
         )
 
-        self.store.addPackage(package)
+        self.store.addPackage(package, find[0]["bin"])
 
     def fetch(self, driver):
         result = requests.get(self.repository_url)
@@ -55,13 +57,15 @@ class Packages:
             raise typer.Exit()
 
         data = result.json()[driver]
-        data = list(filter(lambda x: x["platform"] == filter_platform, data))
+        data = list(filter(lambda x: x["platform"].startswith(filter_platform), data))
         return map(
             lambda x: {
                 "name": f"@{x['platform']}/{driver}-{x['version']}",
                 "title": x["name"],
                 "platform": x["platform"],
                 "url": x["url"],
+                "bin": x.get("bin", ""),
+                "type": x.get("type", "zip"),
             },
             data,
         )

@@ -67,6 +67,7 @@ def migrate(cursor: Cursor):
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 package_name TEXT NOT NULL,
                 active BOOLEAN NOT NULL DEFAULT 0,
+                bin TEXT NOT NULL,
                 timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
             )
             """

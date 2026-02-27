@@ -13,7 +13,7 @@
             "platform": "macos",
             "version": "18.3",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1260054",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -29,7 +29,7 @@
             "platform": "macos",
             "version": "17.9",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1260058",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -45,7 +45,7 @@
             "platform": "macos",
             "version": "16.13",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1260062",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -61,7 +61,7 @@
             "platform": "macos",
             "version": "15.17",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1260066",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -77,7 +77,7 @@
             "platform": "macos",
             "version": "14.22",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1260070",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -93,7 +93,7 @@
             "platform": "macos",
             "version": "13.23",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1259848",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -109,7 +109,7 @@
             "platform": "macos",
             "version": "11.21",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1258672",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -133,7 +133,7 @@
             "platform": "linux",
             "version": "10.23",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1258254",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -141,7 +141,7 @@
             "platform": "linux",
             "version": "10.23",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1258252",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -149,7 +149,7 @@
             "platform": "macos",
             "version": "10.23",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1258260",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -173,7 +173,7 @@
             "platform": "linux",
             "version": "9.6.24",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1257900",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -181,7 +181,7 @@
             "platform": "linux",
             "version": "9.6.24",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1257901",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -189,7 +189,7 @@
             "platform": "macos",
             "version": "9.6.24",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1257903",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -197,7 +197,7 @@
             "platform": "linux",
             "version": "9.5.25",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1257621",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -205,7 +205,7 @@
             "platform": "linux",
             "version": "9.5.25",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=1257619",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -237,7 +237,7 @@
             "platform": "linux",
             "version": "9.4.26",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=12370",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -245,7 +245,7 @@
             "platform": "linux",
             "version": "9.4.26",
             "url": "https://sbp.enterprisedb.com/getfile.jsp?fileid=12369",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -253,7 +253,7 @@
             "platform": "macos",
             "version": "9.4.26",
             "url": "http://sbp.enterprisedb.com/getfile.jsp?fileid=12175",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -277,7 +277,7 @@
             "platform": "linux",
             "version": "9.3.25",
             "url": "https://get.enterprisedb.com/postgresql/postgresql-9.3.25-1-linux-x64-binaries.tar.gz",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -285,7 +285,7 @@
             "platform": "linux",
             "version": "9.3.25",
             "url": "https://get.enterprisedb.com/postgresql/postgresql-9.3.25-1-linux-binaries.tar.gz",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -293,7 +293,7 @@
             "platform": "macos",
             "version": "9.3.25",
             "url": "https://get.enterprisedb.com/postgresql/postgresql-9.3.25-1-osx-binaries.zip",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -317,7 +317,7 @@
             "platform": "linux",
             "version": "9.2.24",
             "url": "https://get.enterprisedb.com/postgresql/postgresql-9.2.24-1-linux-x64-binaries.tar.gz",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -325,7 +325,7 @@
             "platform": "linux",
             "version": "9.2.24",
             "url": "https://get.enterprisedb.com/postgresql/postgresql-9.2.24-1-linux-binaries.tar.gz",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -333,7 +333,7 @@
             "platform": "macos",
             "version": "9.2.24",
             "url": "https://get.enterprisedb.com/postgresql/postgresql-9.2.24-1-osx-binaries.zip",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         },
         {
@@ -357,7 +357,7 @@
             "platform": "linux",
             "version": "9.1.24",
             "url": "https://www.enterprisedb.com/postgresql-9124-binaries-linux64",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -365,7 +365,7 @@
             "platform": "linux",
             "version": "9.1.24",
             "url": "https://www.enterprisedb.com/postgresql-9124-binaries-linux32",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "tar.gz"
         },
         {
@@ -373,7 +373,7 @@
             "platform": "macos",
             "version": "9.1.24",
             "url": "https://www.enterprisedb.com/postgresql-9124-binaries-osx",
-            "bin": "bin",
+            "bin": "pgsql/bin",
             "type": "zip"
         }
     ]
