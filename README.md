@@ -1,3 +1,7 @@
+<p align="start">
+  <img src="https://www.postgresql.org/media/img/about/press/elephant.png" alt="PostgreSQL Elephant" width="120"/>
+</p>
+
 # SnapDB
 
 Proyecto de control de versiones para bases de datos PostgreSQL. Permite realizar backups incrementales y gestionar el historial de cambios en la base de datos.
@@ -7,7 +11,7 @@ Proyecto de control de versiones para bases de datos PostgreSQL. Permite realiza
 1. Clona el repositorio:
 
    ```bash
-   git clone 
+   git clone https://github.com/epmyas2022/SnapDB.git
     ```
 
 2. Navega al directorio del proyecto:
