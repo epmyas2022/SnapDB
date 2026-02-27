@@ -6,6 +6,7 @@ import sys
 import zipfile
 import requests
 from helper.persistent import Store
+import typer
 
 
 class BackupFile:
@@ -48,7 +49,7 @@ class BackupFile:
 
         if not os.path.exists(binary_path):
             print(f"\033[31mpg_restore no encontrado en {binary_path}\033[0m")
-            exit(1)
+            raise typer.Exit()
 
         result = subprocess.run(
             [
@@ -69,7 +70,7 @@ class BackupFile:
         )
         if result.returncode != 0:
             print(f"\033[31mError al ejecutar: {result.stderr}\033[0m")
-            exit(1)
+            raise typer.Exit()
 
     def dropAll(self):
         binary_path = self.__binary_path("psql")
@@ -93,7 +94,7 @@ class BackupFile:
         )
         if result.returncode != 0:
             print(f"\033[31mError al ejecutar: {result.stderr}\033[0m")
-            exit(1)
+            raise typer.Exit()
 
     def backup(
         self,
@@ -105,7 +106,7 @@ class BackupFile:
 
         if not os.path.exists(binary_path):
             print(f"\033[31mpg_dump no encontrado en {binary_path}\033[0m")
-            exit(1)
+            raise typer.Exit()
 
         base_path =  Path(config["path"]) / self.path
 
@@ -141,7 +142,7 @@ class BackupFile:
         )
         if result.returncode != 0:
             print(f"\033[31mError al ejecutar pg_dump: {result.stderr}\033[0m")
-            exit(1)
+            raise typer.Exit()
 
         return str(output_path)
 
@@ -169,7 +170,7 @@ class DownloadFile:
 
         except requests.RequestException as e:
             print(f"\033[31mError al descargar el archivo: {e}\033[0m")
-            exit(1)
+            raise typer.Exit()
 
     def extractZip(self, zip_path, extract_to):
         try:
@@ -185,7 +186,7 @@ class DownloadFile:
 
         except zipfile.BadZipFile as e:
             print(f"\033[31mError al extraer el archivo ZIP: {e}\033[0m")
-            exit(1)
+            raise typer.Exit()
 
     def downloadAndExtract(self, url, extract_to):
         zip_path = self.base_dir / "binaries" / "temp.zip"

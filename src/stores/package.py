@@ -1,3 +1,5 @@
+import typer
+
 class PackageStore:
     def __init__(self, cursor, conn):
         self.cursor = cursor
@@ -33,7 +35,7 @@ class PackageStore:
         result = self.cursor.fetchone()
         if result is None:
             print("\033[31mNo hay paquetes activos. Use 'snapdb --use @platform/driver-version' para activar uno.\033[0m")
-            exit(1)
+            raise typer.Exit()
         return result[0]
     
     def getPackages(self):

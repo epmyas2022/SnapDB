@@ -1,4 +1,5 @@
 import hashlib
+import typer
 
 class ControlStore:
     def getStaging(self):
@@ -30,7 +31,7 @@ class ControlStore:
         result = self.cursor.fetchone()
         if result is None:
             print(f"\n\033[31mCommit con hash '{hash_value}' no encontrado.\033[0m")
-            exit(1)
+            raise typer.Exit()
         return {
             "hash": result[0],
             "message": result[1],

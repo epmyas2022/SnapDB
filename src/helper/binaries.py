@@ -4,6 +4,7 @@ import requests
 import platform
 from helper.files import DownloadFile
 from helper.persistent import Store
+import typer
 
 
 class Packages:
@@ -21,7 +22,7 @@ class Packages:
             print(
                 f"\033[31mEl formato'{package}' es inválido. Use '@platform/driver-version'.\033[0m"
             )
-            exit(1)
+            raise typer.Exit()
 
         driver = match.group("driver")
         data = self.fetch(driver)
@@ -32,7 +33,7 @@ class Packages:
             print(
                 f"\033[31mPaquete '{package}' no encontrado para el driver '{driver}'.\033[0m"
             )
-            exit(1)
+            raise typer.Exit()
 
         download = DownloadFile()
 
@@ -51,7 +52,7 @@ class Packages:
 
         if result.status_code != 200:
             print("Error al obtener la lista de paquetes.")
-            exit(1)
+            raise typer.Exit()
 
         data = result.json()[driver]
         data = list(filter(lambda x: x["platform"] == filter_platform, data))

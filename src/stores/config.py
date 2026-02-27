@@ -1,4 +1,5 @@
 from pathlib import Path
+import typer
 
 
 class ConfigStore:
@@ -11,7 +12,7 @@ class ConfigStore:
         result = self.cursor.fetchone()
         if result is None:
             print("\033[31mNo hay configuraciones activas.")
-            exit(1)
+            raise typer.Exit()
         return {"name": result[0], "path": result[1]}
 
     def getConnections(self):
@@ -30,7 +31,7 @@ class ConfigStore:
         result = self.cursor.fetchone()
         if result is None:
             print("\033[31mNo hay conexiones activas.\033[0m")
-            exit(1)
+            raise typer.Exit()
         return {
             "host": result[0],
             "port": result[1],
@@ -66,7 +67,7 @@ class ConfigStore:
 
         if exist_name:
             print(f"\033[31mYa existe una conexión con el nombre '{name}'.\033[0m")
-            exit(1)
+            raise typer.Exit()
 
         self.cursor.execute(
             "UPDATE Connections SET active = 0 WHERE active = 1 AND id_config = (SELECT id FROM Config WHERE active = 1 LIMIT 1)"
