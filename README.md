@@ -6,6 +6,9 @@
 
 Proyecto de control de versiones para bases de datos PostgreSQL. Permite realizar backups incrementales y gestionar el historial de cambios en la base de datos.
 
+> [!WARNING]
+> Actualmente solo compatible con windows.
+
 ## Instalación
 
 1. Clona el repositorio:
