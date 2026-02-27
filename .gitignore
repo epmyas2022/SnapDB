@@ -13,3 +13,7 @@ __pycache__/*
 /src/binaries/*
 !/src/binaries/.gitkeep
 snapdb.egg-info
+*.spec
+build/*
+dist/*
+*.egg
