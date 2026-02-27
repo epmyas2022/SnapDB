@@ -122,7 +122,7 @@ def connections():
 @app.command()
 def connect(name: str):
     """Activa una conexión específica."""
-    store.updateConnection(name, True)
+    store.connectionActive(name)
     typer.echo(f"Conexión '\033[32m{name}\033[0m' activada.")
 
 

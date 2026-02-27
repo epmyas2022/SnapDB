@@ -1,16 +1,16 @@
 import re
 from pathlib import Path
 import requests
-
+import os
 from helper.files import DownloadFile
 from helper.persistent import Store
+
 
 class Packages:
     def __init__(self):
         self.repository_url = "https://raw.githubusercontent.com/epmyas2022/SnapDB/refs/heads/main/packages.json"
         self.base_dir = Path(__file__).resolve().parent.parent
         self.store = Store()
-
 
     def install(self, package):
         pattern = r"^@(?P<platform>[\w-]+)/(?P<driver>[\w-]+)-(?P<version>[\d\.]+)$"
@@ -36,18 +36,25 @@ class Packages:
 
         download = DownloadFile()
 
-        download.downloadAndExtract(find[0]["url"], self.base_dir / "binaries" / package)
+        download.downloadAndExtract(
+            find[0]["url"], self.base_dir / "binaries" / package
+        )
 
         self.store.addPackage(package)
 
     def fetch(self, driver):
         result = requests.get(self.repository_url)
 
+        types = {"nt": "windows", "darwin": "macos", "linux": "linux"}
+
+        filter_platform = types.get(os.name, "windows")
+
         if result.status_code != 200:
             print("Error al obtener la lista de paquetes.")
             exit(1)
 
         data = result.json()[driver]
+        data = list(filter(lambda x: x["platform"] == filter_platform, data))
         return map(
             lambda x: {
                 "name": f"@{x['platform']}/{driver}-{x['version']}",
