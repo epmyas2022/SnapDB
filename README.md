@@ -14,6 +14,7 @@ Proyecto de control de versiones para bases de datos PostgreSQL. Permite realiza
 - [Requisitos](#requisitos)
 - [Instalación](#instalación)
 - [Instalar en Windows](#instalar-en-windows)
+- [Instalar en Linux](#instalar-en-linux)
 - [Uso](#uso)
 - [Getting Started](#getting-started)
 - [Screenshot](#screenshot)
@@ -62,6 +63,20 @@ Ejecutar como administrador el siguiente comando en PowerShell
 
 ```bash
 $u="https://github.com/epmyas2022/SnapDB/releases/download/beta/snapdb.exe";$d="C:\Tools\SnapDB";mkdir $d -Force; iwr $u -OutFile "$d\snapdb.exe"; setx PATH "$env:PATH;$d" /M
+```
+
+```bash
+snapdb --help
+```
+
+## Instalar en Linux
+
+Ejecutar el siguiente comando en la terminal
+
+```bash
+sudo curl -L https://github.com/epmyas2022/SnapDB/releases/download/beta-linux/snapdb \
+  -o /usr/local/bin/snapdb && \
+sudo chmod +x /usr/local/bin/snapdb
 ```
 
 ```bash
