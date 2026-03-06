@@ -10,7 +10,7 @@ import sys
 class Packages:
     def __init__(self):
         self.repository_url = "https://raw.githubusercontent.com/epmyas2022/SnapDB/refs/heads/main/packages.json"
-         if getattr(sys, "frozen", False):
+        if getattr(sys, "frozen", False):
             # Ejecutable
             self.base_dir = Path(sys.executable).parent
         else:
