@@ -23,7 +23,7 @@ def migrate(cursor: Cursor):
                 host TEXT NOT NULL,
                 port INTEGER NOT NULL,
                 user TEXT NOT NULL,
-                password TEXT NOT NULL,
+                password TEXT NULL,
                 database TEXT NOT NULL,
                 timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
                 name TEXT NOT NULL,

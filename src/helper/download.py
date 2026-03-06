@@ -10,7 +10,12 @@ import typer
 
 class DownloadFile:
     def __init__(self):
-        self.base_dir = Path(__file__).resolve().parent.parent
+        if getattr(sys, "frozen", False):
+            # Ejecutable
+            self.base_dir = Path(sys.executable).parent
+        else:
+            # Desarrollo
+            self.base_dir = Path(__file__).resolve().parent.parent
 
     def download(self, url, output_path):
         try:
@@ -59,13 +64,13 @@ class DownloadFile:
             raise typer.Exit()
 
     def downloadAndExtract(self, url, extract_to, extension):
-        zip_path = self.base_dir / "binaries/" 
+        zip_path = self.base_dir / "binaries/"
 
         if not os.path.exists(zip_path):
             os.makedirs(zip_path)
 
         zip_path = zip_path / f"temp.{extension}"
-        
+
         path = self.download(url, zip_path)
         self.extract(path, extract_to, extension)
         os.remove(path)

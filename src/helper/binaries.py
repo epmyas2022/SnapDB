@@ -5,12 +5,17 @@ import platform
 from helper.download import DownloadFile
 from helper.persistent import Store
 import typer
-
+import sys
 
 class Packages:
     def __init__(self):
         self.repository_url = "https://raw.githubusercontent.com/epmyas2022/SnapDB/refs/heads/main/packages.json"
-        self.base_dir = Path(__file__).resolve().parent.parent
+         if getattr(sys, "frozen", False):
+            # Ejecutable
+            self.base_dir = Path(sys.executable).parent
+        else:
+            # Desarrollo
+            self.base_dir = Path(__file__).resolve().parent.parent
         self.store = Store()
 
     def install(self, package):

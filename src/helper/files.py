@@ -15,7 +15,12 @@ class BackupFile:
         self.path = path
         self.driver = driver
         self.platform = os.name
-        self.base_dir = Path(__file__).resolve().parent.parent
+        if getattr(sys, "frozen", False):
+            # Ejecutable
+            self.base_dir = Path(sys.executable).parent
+        else:
+            # Desarrollo
+            self.base_dir = Path(__file__).resolve().parent.parent
         self.env = os.environ.copy()
         self.store = Store()
 
